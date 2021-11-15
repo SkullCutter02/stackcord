@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from "@nestjs/common";
 
 import { HallService } from "./hall.service";
 import { JwtAuthGuard } from "../auth/guards/jwt.guard";
@@ -52,5 +52,11 @@ export class HallController {
     @Body() makeUserTeacherDto: MakeUserTeacherDto
   ) {
     return this.hallService.makeUserTeacher(hallId, req.user, makeUserTeacherDto);
+  }
+
+  @Delete("/:id")
+  @UseGuards(JwtAuthGuard)
+  deleteHall(@Param("id", ParseUUIDPipe) hallId: string, @Req() req: ReqWithUser) {
+    return this.hallService.deleteHall(hallId, req.user);
   }
 }

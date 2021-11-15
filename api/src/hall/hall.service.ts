@@ -56,6 +56,15 @@ export class HallService {
     return this.getHall(hallId);
   }
 
+  public async deleteHall(hallId: string, user: User) {
+    await this.isTeacherInHall(hallId, user.id);
+
+    await this.hallUserModel.query().where({ hallId }).delete();
+    await this.hallModel.query().deleteById(hallId);
+
+    return { message: "Hall deleted" };
+  }
+
   private async isUserInHall(hallId: string, userId: string) {
     const hall = await this.getHall(hallId);
     const isUserInHall = hall.users.some((hallUser) => hallUser.id === userId);
