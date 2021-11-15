@@ -9,6 +9,8 @@ export class Hall extends BaseModel {
   code: string;
   anonymous: boolean = false;
 
+  users: User[];
+
   static jsonSchema: JSONSchema = {
     type: "object",
     required: ["code", "anonymous"],
@@ -26,8 +28,8 @@ export class Hall extends BaseModel {
         from: "halls.id",
         through: {
           from: "halls_users.hall_id",
-          to: "halls_users.user_id",
           extra: ["role"],
+          to: "halls_users.user_id",
         },
         to: "users.id",
       },

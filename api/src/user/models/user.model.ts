@@ -11,6 +11,8 @@ export class User extends SoftDeleteModel {
   hash: string;
   currentHashedRefreshToken?: string;
 
+  halls: Hall[];
+
   $formatJson(jsonRaw: Objection.Pojo): Objection.Pojo {
     const json = super.$formatJson(jsonRaw);
     return { ...json, hash: undefined, currentHashedRefreshToken: undefined };
@@ -29,13 +31,13 @@ export class User extends SoftDeleteModel {
   static relationMappings: RelationMappings = {
     halls: {
       relation: Model.ManyToManyRelation,
-      modelClass: Hall,
+      modelClass: User,
       join: {
         from: "users.id",
         through: {
-          from: "halls_users.user_id",
-          to: "halls_users.hall_id",
+          from: "halls_users.users_id",
           extra: ["role"],
+          to: "halls_users.halls_id",
         },
         to: "halls.id",
       },
