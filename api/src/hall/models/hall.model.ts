@@ -6,6 +6,7 @@ import { User } from "../../user/models/user.model";
 export class Hall extends BaseModel {
   static tableName = "halls";
 
+  name: string;
   code: string;
   anonymous: boolean = false;
 

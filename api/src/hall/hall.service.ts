@@ -27,10 +27,10 @@ export class HallService {
       .select("*");
   }
 
-  public async createHall({ anonymous }: CreateHallDto, user: User) {
+  public async createHall({ name, anonymous }: CreateHallDto, user: User) {
     const code = generateAlphanumericString();
 
-    const hall = await this.hallModel.query().insert({ code, anonymous });
+    const hall = await this.hallModel.query().insert({ name, code, anonymous });
     await this.hallUserModel.query().insert({ role: "teacher", hallId: hall.id, userId: user.id });
     return this.hallUserModel
       .query()
@@ -44,9 +44,9 @@ export class HallService {
     return this.hallUserModel.query().findOne({ hallId, userId: user.id }).withGraphJoined("[hall, user]");
   }
 
-  public async editHall(hallId: string, user: User, { anonymous }: PatchHallDto) {
+  public async editHall(hallId: string, user: User, { name, anonymous }: PatchHallDto) {
     await this.isTeacherInHall(hallId, user.id);
-    return this.hallModel.query().patchAndFetchById(hallId, { anonymous });
+    return this.hallModel.query().patchAndFetchById(hallId, { name, anonymous });
   }
 
   public async makeUserTeacher(hallId: string, user: User, { userId: targetUserId }: MakeUserTeacherDto) {
