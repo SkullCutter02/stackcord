@@ -10,6 +10,11 @@ import { PatchHallDto } from "./dto/patchHall.dto";
 export class HallController {
   constructor(private readonly hallService: HallService) {}
 
+  @Get("/:id")
+  getHall(@Param("id", ParseUUIDPipe) hallId: string) {
+    return this.hallService.getHall(hallId);
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   getUserHalls(@Req() req: ReqWithUser) {

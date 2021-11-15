@@ -14,6 +14,10 @@ export class HallService {
     @Inject(HallUser) private readonly hallUserModel: typeof HallUser
   ) {}
 
+  public async getHall(hallId: string) {
+    return this.hallModel.query().findById(hallId).withGraphFetched("users");
+  }
+
   public async getUserHalls(user: User) {
     return this.hallUserModel
       .query()
@@ -39,7 +43,7 @@ export class HallService {
   }
 
   private async isTeacherInHall(hallId: string, userId: string) {
-    const hall = await this.hallModel.query().findById(hallId).withGraphFetched("users");
+    const hall = await this.getHall(hallId);
 
     const isTeacherInHall = hall.users.some(
       (hallUser: User & { role: string }) => hallUser.id === userId && hallUser.role === "teacher"
