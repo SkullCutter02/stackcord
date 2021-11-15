@@ -9,6 +9,12 @@ import { CreateHallDto } from "./dto/createHall.dto";
 export class HallController {
   constructor(private readonly hallService: HallService) {}
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getUserHalls(@Req() req: ReqWithUser) {
+    return this.hallService.getUserHalls(req.user);
+  }
+
   @Post()
   @UseGuards(JwtAuthGuard)
   createHall(@Req() req: ReqWithUser, @Body() createPostDto: CreateHallDto) {

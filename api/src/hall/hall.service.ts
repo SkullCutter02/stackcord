@@ -13,6 +13,14 @@ export class HallService {
     @Inject(HallUser) private readonly hallUserModel: typeof HallUser
   ) {}
 
+  async getUserHalls(user: User) {
+    return this.hallUserModel
+      .query()
+      .where({ userId: user.id })
+      .innerJoin("halls", "halls.id", "=", "halls_users.hall_id")
+      .select("*");
+  }
+
   async createHall({ anonymous }: CreateHallDto, user: User) {
     const code = generateAlphanumericString();
 
