@@ -9,8 +9,8 @@ export async function up(knex: Knex): Promise<void> {
     table.string("body").notNullable();
     table.string("whiteboard");
     table.boolean("answered").defaultTo(false).notNullable();
-    table.string("hall_id").references("halls.id").notNullable();
-    table.string("user_id").references("users.id").notNullable();
+    table.string("hall_id").references("halls.id").onDelete("cascade");
+    table.string("user_id").references("users.id");
   });
 }
 

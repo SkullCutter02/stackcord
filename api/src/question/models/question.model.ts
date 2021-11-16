@@ -20,7 +20,7 @@ export class Question extends BaseModel {
     properties: {
       title: { type: "string", maxLength: 300 },
       body: { type: "string", maxLength: 20000 },
-      answer: { type: "boolean", default: false },
+      answered: { type: "boolean", default: false },
     },
   };
 
@@ -37,7 +37,7 @@ export class Question extends BaseModel {
       relation: Model.BelongsToOneRelation,
       modelClass: User,
       join: {
-        from: "question.user_id",
+        from: "questions.user_id",
         to: "users.id",
       },
     },
