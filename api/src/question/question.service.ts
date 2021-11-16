@@ -12,6 +12,10 @@ export class QuestionService {
     return this.questionModel.query().findById(questionId).withGraphJoined("[hall, user]");
   }
 
+  async getUserQuestions(user: User) {
+    return this.questionModel.query().where("user_id", user.id).withGraphJoined("[hall]");
+  }
+
   async createQuestion(user: User, { title, body, whiteboard, hallId }: CreateQuestionDto) {
     const question = await this.questionModel.query().insert({ title, body, whiteboard });
     await question.$relatedQuery("hall").relate(hallId);

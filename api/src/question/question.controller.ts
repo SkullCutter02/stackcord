@@ -14,6 +14,12 @@ export class QuestionController {
     return this.questionService.getQuestion(questionId);
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getUserQuestions(@Req() req: ReqWithUser) {
+    return this.questionService.getUserQuestions(req.user);
+  }
+
   @Post()
   @UseGuards(JwtAuthGuard)
   createQuestion(@Req() req: ReqWithUser, @Body() createQuestionDto: CreateQuestionDto) {
