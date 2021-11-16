@@ -16,6 +16,7 @@ export class Hall extends BaseModel {
     type: "object",
     required: ["code", "anonymous"],
     properties: {
+      name: { type: "string", maxLength: 20 },
       code: { type: "string" },
       anonymous: { type: "boolean", default: false },
     },
