@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from "@nestjs/common";
 
 import { QuestionService } from "./question.service";
 import { JwtAuthGuard } from "../auth/guards/jwt.guard";
 import { ReqWithUser } from "../types/reqWithUser.interface";
 import { CreateQuestionDto } from "./dto/createQuestion.dto";
+import { IsUserOwnerOfQuestionGuard } from "./guards/isUserOwnerOfQuestion.guard";
 
 @Controller("question")
 export class QuestionController {
@@ -25,4 +26,8 @@ export class QuestionController {
   createQuestion(@Req() req: ReqWithUser, @Body() createQuestionDto: CreateQuestionDto) {
     return this.questionService.createQuestion(req.user, createQuestionDto);
   }
+
+  @Patch("/:id")
+  @UseGuards(JwtAuthGuard, IsUserOwnerOfQuestionGuard)
+  editQuestion() {}
 }

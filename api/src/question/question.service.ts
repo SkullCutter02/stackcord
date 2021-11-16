@@ -8,18 +8,23 @@ import { CreateQuestionDto } from "./dto/createQuestion.dto";
 export class QuestionService {
   constructor(@Inject(Question) private readonly questionModel: typeof Question) {}
 
-  async getQuestion(questionId: string) {
+  public async getQuestion(questionId: string) {
     return this.questionModel.query().findById(questionId).withGraphJoined("[hall, user]");
   }
 
-  async getUserQuestions(user: User) {
+  public async getUserQuestions(user: User) {
     return this.questionModel.query().where("user_id", user.id).withGraphJoined("[hall]");
   }
 
-  async createQuestion(user: User, { title, body, whiteboard, hallId }: CreateQuestionDto) {
+  public async createQuestion(user: User, { title, body, whiteboard, hallId }: CreateQuestionDto) {
     const question = await this.questionModel.query().insert({ title, body, whiteboard });
     await question.$relatedQuery("hall").relate(hallId);
     await question.$relatedQuery("user").relate(user.id);
     return this.getQuestion(question.id);
+  }
+
+  public async isUserOwnerOfQuestion(questionId: string, userId: string) {
+    const question = await this.getQuestion(questionId);
+    return question.user.id === userId;
   }
 }

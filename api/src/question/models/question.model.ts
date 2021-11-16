@@ -13,6 +13,7 @@ export class Question extends BaseModel {
   answered: boolean = false;
 
   hall: Hall;
+  user: User;
 
   $formatJson(jsonRaw: Objection.Pojo): Objection.Pojo {
     const json = super.$formatJson(jsonRaw);
