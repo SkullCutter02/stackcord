@@ -28,6 +28,11 @@ export class QuestionService {
     return this.questionModel.query().patchAndFetchById(questionId, { title, body, whiteboard, answered });
   }
 
+  public async deleteQuestion(questionId: string) {
+    await this.questionModel.query().deleteById(questionId);
+    return { message: "Question deleted" };
+  }
+
   public async isUserOwnerOfQuestion(questionId: string, userId: string) {
     const question = await this.getQuestion(questionId);
     return question.user.id === userId;

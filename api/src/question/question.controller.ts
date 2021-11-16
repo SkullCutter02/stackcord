@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from "@nestjs/common";
 
 import { QuestionService } from "./question.service";
 import { JwtAuthGuard } from "../auth/guards/jwt.guard";
@@ -32,5 +32,11 @@ export class QuestionController {
   @UseGuards(JwtAuthGuard, IsUserOwnerOfQuestionGuard)
   editQuestion(@Param("id", ParseUUIDPipe) questionId: string, @Body() patchQuestionDto: PatchQuestionDto) {
     return this.questionService.editQuestion(questionId, patchQuestionDto);
+  }
+
+  @Delete("/:id")
+  @UseGuards(JwtAuthGuard, IsUserOwnerOfQuestionGuard)
+  deleteQuestion(@Param("id", ParseUUIDPipe) questionId: string) {
+    return this.questionService.deleteQuestion(questionId);
   }
 }
