@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
+import { ForbiddenException, Inject, Injectable } from "@nestjs/common";
 
 import { CreateHallDto } from "./dto/createHall.dto";
 import { User } from "../user/models/user.model";
@@ -63,7 +63,7 @@ export class HallService {
     const hall = await this.getHall(hallId);
     const isUserInHall = hall.users.some((hallUser) => hallUser.id === userId);
 
-    if (isUserInHall) throw new UnauthorizedException("User is already in hall");
+    if (isUserInHall) throw new ForbiddenException("User is already in hall");
     return true;
   }
 
@@ -74,7 +74,7 @@ export class HallService {
       (hallUser: User & { role: string }) => hallUser.id === userId && hallUser.role === "teacher"
     );
 
-    if (!isTeacherInHall) throw new UnauthorizedException("User is not a teacher in this hall");
+    if (!isTeacherInHall) throw new ForbiddenException("User is not a teacher in this hall");
 
     return true;
   }
