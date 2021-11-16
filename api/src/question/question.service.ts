@@ -3,6 +3,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Question } from "./models/question.model";
 import { User } from "../user/models/user.model";
 import { CreateQuestionDto } from "./dto/createQuestion.dto";
+import { PatchQuestionDto } from "./dto/patchQuestion.dto";
 
 @Injectable()
 export class QuestionService {
@@ -21,6 +22,10 @@ export class QuestionService {
     await question.$relatedQuery("hall").relate(hallId);
     await question.$relatedQuery("user").relate(user.id);
     return this.getQuestion(question.id);
+  }
+
+  public async editQuestion(questionId: string, { title, body, whiteboard, answered }: PatchQuestionDto) {
+    return this.questionModel.query().patchAndFetchById(questionId, { title, body, whiteboard, answered });
   }
 
   public async isUserOwnerOfQuestion(questionId: string, userId: string) {
