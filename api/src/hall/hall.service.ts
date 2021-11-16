@@ -16,7 +16,7 @@ export class HallService {
   ) {}
 
   public async getHall(hallId: string) {
-    return this.hallModel.query().findById(hallId).withGraphFetched("users");
+    return this.hallModel.query().findById(hallId).withGraphFetched("[users]").withGraphJoined("questions");
   }
 
   public async getUserHalls(userId: string) {

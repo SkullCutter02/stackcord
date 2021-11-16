@@ -2,6 +2,7 @@ import { JSONSchema, Model, RelationMappings } from "objection";
 
 import { BaseModel } from "../../database/base.model";
 import { User } from "../../user/models/user.model";
+import { Question } from "../../question/models/question.model";
 
 export class Hall extends BaseModel {
   static tableName = "halls";
@@ -34,6 +35,14 @@ export class Hall extends BaseModel {
           to: "halls_users.user_id",
         },
         to: "users.id",
+      },
+    },
+    questions: {
+      relation: Model.HasManyRelation,
+      modelClass: Question,
+      join: {
+        from: "halls.id",
+        to: "questions.hall_id",
       },
     },
   };
