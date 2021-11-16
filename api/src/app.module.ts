@@ -10,9 +10,10 @@ import { AuthModule } from "./auth/auth.module";
 import { MailModule } from "./mail/mail.module";
 import { RedisModule } from "./redis/redis.module";
 import { HallModule } from './hall/hall.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(configModuleOptions), DatabaseModule, UserModule, AuthModule, MailModule, RedisModule, HallModule],
+  imports: [ConfigModule.forRoot(configModuleOptions), DatabaseModule, UserModule, AuthModule, MailModule, RedisModule, HallModule, QuestionModule],
   controllers: [AppController],
   providers: [AppService],
 })
