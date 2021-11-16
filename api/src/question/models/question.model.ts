@@ -1,4 +1,4 @@
-import { JSONSchema, Model, RelationMappings } from "objection";
+import Objection, { JSONSchema, Model, RelationMappings } from "objection";
 
 import { BaseModel } from "../../database/base.model";
 import { Hall } from "../../hall/models/hall.model";
@@ -13,6 +13,11 @@ export class Question extends BaseModel {
   answered: boolean = false;
 
   hall: Hall;
+
+  $formatJson(jsonRaw: Objection.Pojo): Objection.Pojo {
+    const json = super.$formatJson(jsonRaw);
+    return { ...json, hallId: undefined, userId: undefined };
+  }
 
   static jsonSchema: JSONSchema = {
     type: "object",
