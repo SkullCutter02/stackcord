@@ -6,6 +6,8 @@ import { ReqWithUser } from "../types/reqWithUser.interface";
 import { CreateHallDto } from "./dto/createHall.dto";
 import { PatchHallDto } from "./dto/patchHall.dto";
 import { MakeUserTeacherDto } from "./dto/makeUserTeacher.dto";
+import { IsUserTeacherInHallGuard } from "./guards/isUserTeacherInHall.guard";
+import { IsUserInHallGuard } from "./guards/isUserInHall.guard";
 
 @Controller("hall")
 export class HallController {
@@ -29,13 +31,13 @@ export class HallController {
   }
 
   @Post("/:id/join")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsUserInHallGuard)
   joinHall(@Param("id", ParseUUIDPipe) hallId: string, @Req() req: ReqWithUser) {
     return this.hallService.joinHall(hallId, req.user);
   }
 
   @Patch("/:id")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsUserTeacherInHallGuard)
   editHall(
     @Param("id", ParseUUIDPipe) hallId: string,
     @Req() req: ReqWithUser,
@@ -45,7 +47,7 @@ export class HallController {
   }
 
   @Patch("/:id/teacher")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsUserTeacherInHallGuard)
   makeUserTeacher(
     @Param("id", ParseUUIDPipe) hallId: string,
     @Req() req: ReqWithUser,
@@ -55,7 +57,7 @@ export class HallController {
   }
 
   @Delete("/:id")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsUserTeacherInHallGuard)
   deleteHall(@Param("id", ParseUUIDPipe) hallId: string, @Req() req: ReqWithUser) {
     return this.hallService.deleteHall(hallId, req.user);
   }

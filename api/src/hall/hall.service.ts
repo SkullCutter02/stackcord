@@ -39,41 +39,35 @@ export class HallService {
   }
 
   public async joinHall(hallId: string, user: User) {
-    await this.isUserInHall(hallId, user.id);
     await this.hallUserModel.query().insert({ role: "student", hallId, userId: user.id });
     return this.hallUserModel.query().findOne({ hallId, userId: user.id }).withGraphJoined("[hall, user]");
   }
 
   public async editHall(hallId: string, user: User, { name, anonymous }: PatchHallDto) {
-    await this.isTeacherInHall(hallId, user.id);
     return this.hallModel.query().patchAndFetchById(hallId, { name, anonymous });
   }
 
   public async makeUserTeacher(hallId: string, user: User, { userId: targetUserId }: MakeUserTeacherDto) {
-    await this.isTeacherInHall(hallId, user.id);
-
     await this.hallUserModel.query().where({ hallId: hallId, userId: targetUserId }).patch({ role: "teacher" });
     return this.getHall(hallId);
   }
 
   public async deleteHall(hallId: string, user: User) {
-    await this.isTeacherInHall(hallId, user.id);
-
     await this.hallUserModel.query().where({ hallId }).delete();
     await this.hallModel.query().deleteById(hallId);
 
     return { message: "Hall deleted" };
   }
 
-  private async isUserInHall(hallId: string, userId: string) {
+  public async isUserInHall(hallId: string, userId: string) {
     const hall = await this.getHall(hallId);
     const isUserInHall = hall.users.some((hallUser) => hallUser.id === userId);
 
     if (isUserInHall) throw new UnauthorizedException("User is already in hall");
-    return hall;
+    return true;
   }
 
-  private async isTeacherInHall(hallId: string, userId: string) {
+  public async isTeacherInHall(hallId: string, userId: string) {
     const hall = await this.getHall(hallId);
 
     const isTeacherInHall = hall.users.some(
@@ -82,6 +76,6 @@ export class HallService {
 
     if (!isTeacherInHall) throw new UnauthorizedException("User is not a teacher in this hall");
 
-    return hall;
+    return true;
   }
 }
