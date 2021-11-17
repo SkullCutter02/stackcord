@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseUUIDPipe, Post, Req, UseGuards } from "@nestjs/common";
 
 import { JwtAuthGuard } from "../auth/guards/jwt.guard";
 import { ReqWithUser } from "../types/reqWithUser.interface";
@@ -8,6 +8,11 @@ import { CreateAnswerDto } from "./dto/createAnswer.dto";
 @Controller("answer")
 export class AnswerController {
   constructor(private readonly answerService: AnswerService) {}
+
+  @Get("/:id")
+  getAnswer(@Param("id", ParseUUIDPipe) answerId: string) {
+    return this.answerService.getAnswer(answerId);
+  }
 
   @Post()
   @UseGuards(JwtAuthGuard)

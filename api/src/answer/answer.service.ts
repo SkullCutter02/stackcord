@@ -8,11 +8,11 @@ import { Answer } from "./models/answer.model";
 export class AnswerService {
   constructor(@Inject(Answer) private readonly answerModel: typeof Answer) {}
 
-  async getAnswer(answerId: string) {
+  public async getAnswer(answerId: string) {
     return this.answerModel.query().findById(answerId).withGraphJoined("[question, user]");
   }
 
-  async createAnswer(user: User, { body, whiteboard, questionId }: CreateAnswerDto) {
+  public async createAnswer(user: User, { body, whiteboard, questionId }: CreateAnswerDto) {
     const answer = await this.answerModel.query().insert({ body, whiteboard });
     await answer.$relatedQuery("question").relate(questionId);
     await answer.$relatedQuery("user").relate(user.id);
