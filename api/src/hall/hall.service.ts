@@ -16,7 +16,11 @@ export class HallService {
   ) {}
 
   public async getHall(hallId: string) {
-    return this.hallModel.query().findById(hallId).withGraphFetched("[users]").withGraphJoined("questions");
+    return this.hallModel
+      .query()
+      .findById(hallId)
+      .withGraphFetched("[users]")
+      .withGraphJoined("[questions, questions.answers]");
   }
 
   public async getUserHalls(userId: string) {
