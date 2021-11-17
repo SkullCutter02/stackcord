@@ -26,7 +26,7 @@ export class Hall extends BaseModel {
   static relationMappings: RelationMappings = {
     users: {
       relation: Model.ManyToManyRelation,
-      modelClass: User,
+      modelClass: __dirname + "/../../user/models/user.model",
       join: {
         from: "halls.id",
         through: {
@@ -39,7 +39,7 @@ export class Hall extends BaseModel {
     },
     questions: {
       relation: Model.HasManyRelation,
-      modelClass: Question,
+      modelClass: __dirname + "/../../question/models/question.model",
       join: {
         from: "halls.id",
         to: "questions.hall_id",

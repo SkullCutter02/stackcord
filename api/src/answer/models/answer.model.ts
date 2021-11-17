@@ -29,7 +29,7 @@ export class Answer extends BaseModel {
   static relationMappings: RelationMappings = {
     question: {
       relation: Model.BelongsToOneRelation,
-      modelClass: Question,
+      modelClass: __dirname + "/../../question/models/question.model",
       join: {
         from: "answers.question_id",
         to: "questions.id",
@@ -37,7 +37,7 @@ export class Answer extends BaseModel {
     },
     user: {
       relation: Model.BelongsToOneRelation,
-      modelClass: User,
+      modelClass: __dirname + "/../../user/models/user.model",
       join: {
         from: "answers.user_id",
         to: "users.id",

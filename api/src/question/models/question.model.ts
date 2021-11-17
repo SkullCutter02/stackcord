@@ -3,6 +3,7 @@ import Objection, { JSONSchema, Model, RelationMappings } from "objection";
 import { BaseModel } from "../../database/base.model";
 import { Hall } from "../../hall/models/hall.model";
 import { User } from "../../user/models/user.model";
+import { Answer } from "../../answer/models/answer.model";
 
 export class Question extends BaseModel {
   static tableName = "questions";
@@ -14,6 +15,7 @@ export class Question extends BaseModel {
 
   hall: Hall;
   user: User;
+  answers: Answer[];
 
   $formatJson(jsonRaw: Objection.Pojo): Objection.Pojo {
     const json = super.$formatJson(jsonRaw);
@@ -33,7 +35,7 @@ export class Question extends BaseModel {
   static relationMappings: RelationMappings = {
     hall: {
       relation: Model.BelongsToOneRelation,
-      modelClass: Hall,
+      modelClass: __dirname + "/../../hall/models/hall.model",
       join: {
         from: "questions.hall_id",
         to: "halls.id",
@@ -41,10 +43,18 @@ export class Question extends BaseModel {
     },
     user: {
       relation: Model.BelongsToOneRelation,
-      modelClass: User,
+      modelClass: __dirname + "/../../user/models/user.model",
       join: {
         from: "questions.user_id",
         to: "users.id",
+      },
+    },
+    answers: {
+      relation: Model.HasManyRelation,
+      modelClass: __dirname + "/../../answer/models/answer.model",
+      join: {
+        from: "questions.id",
+        to: "answers.question_id",
       },
     },
   };
