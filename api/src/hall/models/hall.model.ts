@@ -2,7 +2,6 @@ import { JSONSchema, Model, RelationMappings } from "objection";
 
 import { BaseModel } from "../../database/base.model";
 import { User } from "../../user/models/user.model";
-import { Question } from "../../question/models/question.model";
 
 export class Hall extends BaseModel {
   static tableName = "halls";
