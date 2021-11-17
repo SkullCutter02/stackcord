@@ -24,6 +24,11 @@ export class AnswerService {
     return this.answerModel.query().patchAndFetchById(answerId, { body, whiteboard });
   }
 
+  public async deleteAnswer(answerId: string) {
+    await this.answerModel.query().deleteById(answerId);
+    return { message: "Answer deleted" };
+  }
+
   public async isUserOwnerOfAnswer(answerId: string, userId: string) {
     const answer = await this.getAnswer(answerId);
     return answer.user.id === userId;
