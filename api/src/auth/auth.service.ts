@@ -11,6 +11,7 @@ import { ForgotPasswordDto } from "./dto/forgotPassword.dto";
 import { MailService } from "../mail/mail.service";
 import { ResetPasswordDto } from "./dto/resetPassword.dto";
 import { RedisService } from "../redis/redis.service";
+import { JwtPayload } from "../types/jwtPayload.interface";
 
 @Injectable()
 export class AuthService {
@@ -92,6 +93,14 @@ export class AuthService {
     if (!(await argon2.verify(user.hash, password))) throw new UnauthorizedException();
 
     return user;
+  }
+
+  public async getUserFromAccessToken(token: string) {
+    const payload: JwtPayload = this.jwtService.verify(token, {
+      secret: this.configService.get("JWT_ACCESS_TOKEN_SECRET"),
+    });
+
+    if (payload.id) return this.userService.findById(payload.id);
   }
 
   private async handleCookies(userId: string) {
