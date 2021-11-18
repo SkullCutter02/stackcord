@@ -7,9 +7,4 @@ export class ChangeUserDetailsDto {
   @IsString()
   @IsEmail()
   email: string;
-
-  //change profile image
-  @IsString()
-  profileImage: string;
-
 }

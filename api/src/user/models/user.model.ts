@@ -10,7 +10,7 @@ export class User extends SoftDeleteModel {
   email: string;
   hash: string;
   currentHashedRefreshToken?: string;
-  profileImg?: string;
+
   halls: Hall[];
 
   $formatJson(jsonRaw: Objection.Pojo): Objection.Pojo {
@@ -25,7 +25,6 @@ export class User extends SoftDeleteModel {
       name: { type: "string" },
       email: { type: "string", format: "email" },
       hash: { type: "string" },
-      profileImg: { type: "string" },
     },
   };
 
