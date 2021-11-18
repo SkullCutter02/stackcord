@@ -9,8 +9,9 @@ const LoginForm: React.FC = () => {
     <>
       <FormContainer header={"Login"}>
         <PrimaryTextInput
-          placeholder={"What's your name?"}
+          placeholder={"What's your email?"}
           margin={"0 0 25px 0"}
+          inputType={"email"}
           width={"60%"}
         />
         <PrimaryTextInput

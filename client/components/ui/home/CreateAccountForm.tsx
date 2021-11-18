@@ -14,6 +14,12 @@ const CreateAccountForm: React.FC = () => {
           width={"60%"}
         />
         <PrimaryTextInput
+          placeholder={"What's your email?"}
+          margin={"0 0 25px 0"}
+          inputType={"email"}
+          width={"60%"}
+        />
+        <PrimaryTextInput
           placeholder={"What's your password?"}
           margin={"0 0 25px 0"}
           inputType={"password"}
