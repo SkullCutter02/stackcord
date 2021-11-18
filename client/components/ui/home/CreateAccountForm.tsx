@@ -1,42 +1,31 @@
 import React from "react";
 
+import FormContainer from "./FormContainer";
+import PrimaryTextInput from "../../widgets/PrimaryTextInput";
+import RoundedButton from "../../widgets/RoundedButton";
+
 const CreateAccountForm: React.FC = () => {
   return (
     <>
-      <div className="create-account-form">
-        <h1>Create Account</h1>
-        <input type="text" placeholder={"What will your username be?"} />
-        <input type="text" placeholder={"What will your password be?"} />
-        <button>Sign Up</button>
-      </div>
+      <FormContainer header={"Create Account"}>
+        <PrimaryTextInput
+          placeholder={"What's your name?"}
+          margin={"0 0 25px 0"}
+        />
+        <PrimaryTextInput
+          placeholder={"What's your password?"}
+          margin={"0 0 25px 0"}
+          inputType={"password"}
+        />
+        <RoundedButton
+          buttonText={"Sign Up"}
+          buttonColor={"secondary"}
+          width={"40%"}
+          buttonType={"submit"}
+        />
+      </FormContainer>
 
       <style jsx>{`
-        .create-account-form {
-          display: flex;
-          flex-direction: column;
-          width: 50%;
-          justify-content: center;
-          align-items: center;
-          padding: 10vw;
-        }
-
-        .create-account-form > * {
-          margin-bottom: 25px;
-        }
-
-        input {
-          background: var(--secondaryBackgroundColor);
-          border: 2px solid var(--borderColor);
-          padding: 17px 25px;
-          border-radius: 200px;
-          font-size: 0.8rem;
-          width: 100%;
-        }
-
-        h1 {
-          text-transform: uppercase;
-        }
-
         button {
           background: var(--secondaryColor);
           padding: 17px 25px;

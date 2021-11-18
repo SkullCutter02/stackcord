@@ -8,7 +8,7 @@ const HomePageContainer: React.FC = () => {
     <>
       <main>
         <CreateAccountForm />
-        <div></div>
+        <div className="divider" />
         <LoginForm />
       </main>
 
@@ -20,7 +20,7 @@ const HomePageContainer: React.FC = () => {
           align-items: center;
         }
 
-        div {
+        .divider {
           height: 80vh;
           background: var(--borderColor);
           width: 2px;
