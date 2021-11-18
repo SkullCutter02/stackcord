@@ -1,13 +1,13 @@
 import React from "react";
 
-const CreateAccountForm: React.FC = () => {
+const LoginForm: React.FC = () => {
   return (
     <>
       <div className="create-account-form">
-        <h1>Create Account</h1>
-        <input type="text" placeholder={"What will your username be?"} />
-        <input type="text" placeholder={"What will your password be?"} />
-        <button>Sign Up</button>
+        <h1>Login</h1>
+        <input type="text" placeholder={"What’s your username?"} />
+        <input type="text" placeholder={"What’s your password?"} />
+        <button>Sign In</button>
       </div>
 
       <style jsx>{`
@@ -38,7 +38,7 @@ const CreateAccountForm: React.FC = () => {
         }
 
         button {
-          background: var(--secondaryColor);
+          background: var(--primaryColor);
           padding: 17px 25px;
           border: none;
           border-radius: 200px;
@@ -50,4 +50,4 @@ const CreateAccountForm: React.FC = () => {
   );
 };
 
-export default CreateAccountForm;
+export default LoginForm;
