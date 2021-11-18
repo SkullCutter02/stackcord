@@ -21,6 +21,7 @@ const CreateAccountForm: React.FC = () => {
           buttonText={"Sign Up"}
           buttonColor={"secondary"}
           width={"40%"}
+          minWidth={"100px"}
           buttonType={"submit"}
         />
       </FormContainer>

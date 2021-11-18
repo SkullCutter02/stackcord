@@ -21,6 +21,7 @@ const LoginForm: React.FC = () => {
           buttonText={"Sign In"}
           buttonColor={"primary"}
           width={"40%"}
+          minWidth={"100px"}
           buttonType={"submit"}
         />
       </FormContainer>

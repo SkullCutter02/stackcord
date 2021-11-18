@@ -10,6 +10,7 @@ interface Props {
   textTransform?: "initial" | "uppercase";
   hasBorder?: boolean;
   fontWeight?: number;
+  minWidth?: string;
 }
 
 const RoundedButton: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const RoundedButton: React.FC<Props> = ({
   textTransform = "uppercase",
   hasBorder = false,
   fontWeight = 400,
+  minWidth = "0",
 }) => {
   const color =
     buttonColor === "primary"
@@ -44,6 +46,7 @@ const RoundedButton: React.FC<Props> = ({
           width: ${width};
           font-family: var(--secondaryFont);
           font-weight: ${fontWeight};
+          min-width: ${minWidth};
         }
       `}</style>
     </>
