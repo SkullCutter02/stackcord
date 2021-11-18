@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Uni Sans";
-  src: url("/fonts/Uni Sans Heavy.otf") format("otf");
+  src: url("/fonts/Uni Sans Heavy.otf");
 }
 
 body {
