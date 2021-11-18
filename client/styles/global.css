@@ -2,8 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--primaryTextColor);
 }
 
 body {
   background: var(--primaryBackgroundColor);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input:focus {
+  outline: none;
 }
