@@ -16,3 +16,7 @@ button {
 button:disabled {
   cursor: not-allowed;
 }
+
+input:focus {
+  outline: none;
+}
