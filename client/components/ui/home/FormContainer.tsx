@@ -17,6 +17,9 @@ const FormContainer: React.FC<Props> = ({ children, header }) => {
           text-transform: uppercase;
           margin-bottom: 25px;
           font-family: var(--secondaryFont);
+          font-size: calc(1.2em + 1vw);
+          text-align: center;
+          white-space: nowrap;
         }
 
         div {
