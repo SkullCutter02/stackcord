@@ -40,6 +40,8 @@ const RoundedButton: React.FC<Props> = ({
           border-radius: ${borderRadius};
           text-transform: ${textTransform};
           width: ${width};
+          font-family: var(--secondaryFont);
+          font-weight: 800;
         }
       `}</style>
     </>

@@ -16,6 +16,7 @@ const FormContainer: React.FC<Props> = ({ children, header }) => {
         h1 {
           text-transform: uppercase;
           margin-bottom: 25px;
+          font-family: var(--secondaryFont);
         }
 
         div {
@@ -24,7 +25,7 @@ const FormContainer: React.FC<Props> = ({ children, header }) => {
           width: 50%;
           justify-content: center;
           align-items: center;
-          padding: 10vw;
+          padding: 13vw;
         }
       `}</style>
     </>
