@@ -9,6 +9,7 @@ interface Props {
   borderRadius?: string;
   fontSize?: string;
   width?: string;
+  minWidth?: string;
   required?: boolean;
   inputType?: HTMLInputTypeAttribute;
 }
@@ -22,6 +23,7 @@ const PrimaryTextInput: React.FC<Props> = ({
   borderRadius = "200px",
   fontSize = "0.8rem",
   width = "100%",
+  minWidth = "0",
   required = true,
   inputType = "text",
 }) => {
@@ -37,6 +39,7 @@ const PrimaryTextInput: React.FC<Props> = ({
           border-radius: ${borderRadius};
           font-size: ${fontSize};
           width: ${width};
+          min-width: ${minWidth};
           margin: ${margin};
         }
       `}</style>

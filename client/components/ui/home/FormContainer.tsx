@@ -28,7 +28,6 @@ const FormContainer: React.FC<Props> = ({ children, header }) => {
           width: 50%;
           justify-content: center;
           align-items: center;
-          padding: 13vw;
         }
       `}</style>
     </>

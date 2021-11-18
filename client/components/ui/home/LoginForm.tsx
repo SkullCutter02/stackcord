@@ -11,11 +11,13 @@ const LoginForm: React.FC = () => {
         <PrimaryTextInput
           placeholder={"What's your name?"}
           margin={"0 0 25px 0"}
+          width={"60%"}
         />
         <PrimaryTextInput
           placeholder={"What's your password?"}
           margin={"0 0 25px 0"}
           inputType={"password"}
+          width={"60%"}
         />
         <RoundedButton
           buttonText={"Sign In"}
