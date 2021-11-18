@@ -22,7 +22,7 @@ const CreateAccountForm: React.FC = () => {
         <RoundedButton
           buttonText={"Sign Up"}
           buttonColor={"secondary"}
-          width={"40%"}
+          width={"30%"}
           minWidth={"100px"}
           buttonType={"submit"}
         />

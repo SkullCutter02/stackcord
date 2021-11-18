@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
         <RoundedButton
           buttonText={"Sign In"}
           buttonColor={"primary"}
-          width={"40%"}
+          width={"30%"}
           minWidth={"100px"}
           buttonType={"submit"}
         />
