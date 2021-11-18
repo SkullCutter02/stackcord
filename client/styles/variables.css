@@ -5,4 +5,6 @@
   --primaryColor: #3580d9;
   --secondaryColor: #ed553b;
   --primaryTextColor: #fff;
+  --primaryFont: Inter, serif;
+  --secondaryFont: "Uni Sans", serif;
 }
