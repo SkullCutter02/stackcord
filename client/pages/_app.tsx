@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 import DashboardLayout from "../components/layout/dashboard/DashboardLayout";
+import { HallProvider } from "../context/HallContext";
 
 import "../styles/global.css";
 import "../styles/variables.css";
@@ -27,9 +28,11 @@ function App({ Component, pageProps }: AppProps) {
 
         <SkeletonTheme baseColor={"#393939"} highlightColor={"#636363"}>
           {path[1] !== "" ? (
-            <DashboardLayout>
-              <Component {...pageProps} />
-            </DashboardLayout>
+            <HallProvider>
+              <DashboardLayout>
+                <Component {...pageProps} />
+              </DashboardLayout>
+            </HallProvider>
           ) : (
             <Component {...pageProps} />
           )}

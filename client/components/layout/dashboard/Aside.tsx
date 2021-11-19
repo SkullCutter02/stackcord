@@ -1,29 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { HallContext } from "../../../context/HallContext";
 
 const Aside: React.FC = () => {
+  const { hall } = useContext(HallContext);
+
   return (
     <>
       <aside>
         <div className="hall-info">
           <div className="hall-text">
-            <h1 className="hall-name">Math AA HL</h1>
-            <p className="hall-code">Code: 4j2234n13</p>
+            <h1 className="hall-name">{hall?.name}</h1>
+            <p className="hall-code">{hall && "Code: " + hall?.code}</p>
           </div>
         </div>
-        <h1 className="member-heading">Teachers (1)</h1>
-        <div className="member">
-          <div className="member-avatar" />
-          <p className="member-name">D. Odunlami</p>
-        </div>
-        <h1 className="member-heading">Students (5)</h1>
-        <div className="member">
-          <div className="member-avatar" />
-          <p className="member-name">Colin Chau</p>
-        </div>
-        <div className="member">
-          <div className="member-avatar" />
-          <p className="member-name">Colin Chau</p>
-        </div>
+        <h1 className="member-heading">
+          {hall &&
+            "Teachers (" +
+              hall?.users.filter((user) => user.role === "teacher").length +
+              ")"}
+        </h1>
+        {hall?.users
+          .filter((user) => user.role === "teacher")
+          .map((user) => (
+            <div className="member" key={user.id}>
+              <div className="member-avatar" />
+              <p className="member-name">{user.name}</p>
+            </div>
+          ))}
+        <h1 className="member-heading">
+          {hall &&
+            "Students (" +
+              hall?.users.filter((user) => user.role === "student").length +
+              ")"}
+        </h1>
+        {hall?.users
+          .filter((user) => user.role === "student")
+          .map((user) => (
+            <div className="member" key={user.id}>
+              <div className="member-avatar" />
+              <p className="member-name">{user.name}</p>
+            </div>
+          ))}
       </aside>
 
       <style jsx>{`
