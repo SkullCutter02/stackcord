@@ -2,14 +2,12 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 
 import IUser from "../../../types/user.interface";
+import { useQuery } from "react-query";
+import getMe from "../../../queries/getMe";
 
-interface Props {
-  isLoading: boolean;
-  user: IUser;
-}
+const User: React.FC = () => {
+  const { isLoading, data: user } = useQuery<IUser>("user", () => getMe());
 
-const User: React.FC<Props> = ({ isLoading, user }) => {
-  console.log(isLoading);
   return (
     <>
       <div className="user">
