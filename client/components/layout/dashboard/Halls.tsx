@@ -19,7 +19,10 @@ const Halls: React.FC = () => {
                 <div className="hall-image" />
                 <div className="hall-info">
                   <p className="hall-name">{hall.name}</p>
-                  <p className="student-count">5 students</p>
+                  <p className="student-count">
+                    {hall.users.length} student{hall.users.length !== 1 && "s"}
+                    {/*TODO: DON'T COUNT TEACHERS AS STUDENTS*/}
+                  </p>
                 </div>
               </div>
             ))}
