@@ -52,6 +52,7 @@ const Aside: React.FC = () => {
           background: var(--secondaryBackgroundColor);
           border-left: 2px solid #383838;
           padding: 40px;
+          overflow-y: scroll;
         }
 
         .hall-name {
