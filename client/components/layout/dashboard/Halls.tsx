@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useQuery } from "react-query";
 
 import getHalls from "../../../queries/getHalls";
@@ -15,16 +16,19 @@ const Halls: React.FC = () => {
         {!isLoading && (
           <>
             {halls.map((hall) => (
-              <div className="hall" key={hall.id}>
-                <div className="hall-image" />
-                <div className="hall-info">
-                  <p className="hall-name">{hall.name}</p>
-                  <p className="student-count">
-                    {hall.users.length} student{hall.users.length !== 1 && "s"}
-                    {/*TODO: DON'T COUNT TEACHERS AS STUDENTS*/}
-                  </p>
+              <Link key={hall.id} href={`/dashboard/hall/${hall.id}`}>
+                <div className="hall">
+                  <div className="hall-image" />
+                  <div className="hall-info">
+                    <p className="hall-name">{hall.name}</p>
+                    <p className="student-count">
+                      {hall.users.length} student
+                      {hall.users.length !== 1 && "s"}
+                      {/*TODO: DON'T COUNT TEACHERS AS STUDENTS*/}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </>
         )}
@@ -37,6 +41,7 @@ const Halls: React.FC = () => {
           border-radius: 12px;
           padding: 12px;
           margin-right: 30px;
+          cursor: pointer;
         }
 
         .hall-info {
