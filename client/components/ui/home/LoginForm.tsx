@@ -24,7 +24,7 @@ const LoginForm: React.FC = () => {
     ),
   });
 
-  const { login } = useLogin();
+  const { login, isLoading, error } = useLogin();
 
   return (
     <>
@@ -32,6 +32,7 @@ const LoginForm: React.FC = () => {
         header={"Login"}
         handleSubmit={handleSubmit}
         submitFn={login}
+        error={error}
       >
         <PrimaryTextInput
           placeholder={"What's your email?"}
@@ -57,6 +58,7 @@ const LoginForm: React.FC = () => {
           width={"30%"}
           minWidth={"100px"}
           buttonType={"submit"}
+          disabled={isLoading}
         />
       </FormContainer>
     </>

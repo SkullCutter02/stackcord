@@ -1,9 +1,10 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 
 interface Props {
   header: string;
   handleSubmit: any;
   submitFn: (...any) => any;
+  error: string;
 }
 
 const FormContainer: React.FC<Props> = ({
@@ -11,12 +12,14 @@ const FormContainer: React.FC<Props> = ({
   header,
   handleSubmit,
   submitFn,
+  error,
 }) => {
   return (
     <>
       <form onSubmit={handleSubmit(submitFn)}>
         <h1>{header}</h1>
         {children}
+        <p className="err-msg">{error}</p>
       </form>
 
       <style jsx>{`
@@ -35,6 +38,10 @@ const FormContainer: React.FC<Props> = ({
           width: 50%;
           justify-content: center;
           align-items: center;
+        }
+
+        .err-msg {
+          margin-top: 15px;
         }
       `}</style>
     </>

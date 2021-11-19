@@ -3,6 +3,7 @@ import React from "react";
 interface Props {
   buttonText: string;
   buttonColor: "primary" | "secondary" | string;
+  disabled?: boolean;
   padding?: string;
   borderRadius?: string;
   width?: string;
@@ -16,6 +17,7 @@ interface Props {
 const RoundedButton: React.FC<Props> = ({
   buttonColor,
   buttonText,
+  disabled,
   padding = "17px 25px",
   borderRadius = "200px",
   width = "initial",
@@ -34,7 +36,9 @@ const RoundedButton: React.FC<Props> = ({
 
   return (
     <>
-      <button type={buttonType}>{buttonText}</button>
+      <button type={buttonType} disabled={disabled}>
+        {buttonText}
+      </button>
 
       <style jsx>{`
         button {

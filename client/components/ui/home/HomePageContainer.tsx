@@ -7,7 +7,7 @@ const HomePageContainer: React.FC = () => {
   return (
     <>
       <main>
-        <CreateAccountForm />
+        {/*<CreateAccountForm />*/}
         <div className="divider" />
         <LoginForm />
       </main>

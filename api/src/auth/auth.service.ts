@@ -88,9 +88,9 @@ export class AuthService {
   public async validateUserCredentials(email: string, password: string) {
     const user = await this.userService.findByEmail(email);
 
-    if (!user) throw new UnauthorizedException();
+    if (!user) throw new UnauthorizedException("Incorrect credentials");
 
-    if (!(await argon2.verify(user.hash, password))) throw new UnauthorizedException();
+    if (!(await argon2.verify(user.hash, password))) throw new UnauthorizedException("Incorrect credentials");
 
     return user;
   }
