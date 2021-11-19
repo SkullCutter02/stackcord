@@ -2,15 +2,22 @@ import React from "react";
 
 interface Props {
   header: string;
+  handleSubmit: any;
+  submitFn: (...any) => any;
 }
 
-const FormContainer: React.FC<Props> = ({ children, header }) => {
+const FormContainer: React.FC<Props> = ({
+  children,
+  header,
+  handleSubmit,
+  submitFn,
+}) => {
   return (
     <>
-      <div>
+      <form onSubmit={handleSubmit(submitFn)}>
         <h1>{header}</h1>
         {children}
-      </div>
+      </form>
 
       <style jsx>{`
         h1 {
@@ -22,7 +29,7 @@ const FormContainer: React.FC<Props> = ({ children, header }) => {
           white-space: nowrap;
         }
 
-        div {
+        form {
           display: flex;
           flex-direction: column;
           width: 50%;

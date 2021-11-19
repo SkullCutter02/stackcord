@@ -1,4 +1,5 @@
 import React from "react";
+
 import CreateAccountForm from "./CreateAccountForm";
 import LoginForm from "./LoginForm";
 
@@ -8,7 +9,7 @@ const HomePageContainer: React.FC = () => {
       <main>
         <CreateAccountForm />
         <div className="divider" />
-        <LoginForm />
+        {/*<LoginForm />*/}
       </main>
 
       <style jsx>{`

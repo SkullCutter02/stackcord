@@ -32,3 +32,8 @@ input:focus {
 input:focus::placeholder {
   color: transparent;
 }
+
+.err-msg {
+  color: var(--errorColor);
+  font-size: 0.7rem;
+}

@@ -4,10 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@hookform/resolvers": "^2.8.3",
     "next": "^12.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.32.3"
+    "react-hook-form": "^7.19.5",
+    "react-query": "^3.32.3",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "dev": "next",

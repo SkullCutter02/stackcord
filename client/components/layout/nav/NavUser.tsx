@@ -1,9 +1,7 @@
 import React from "react";
 const UserImg = { src: "x" };
+
 const UserInfor = ["UserName", "UserId"];
-import { SettingsIcon } from "@chakra-ui/icons";
-import PrimaryTextInput from "../../widgets/PrimaryTextInput";
-import RoundedButton from "../../widgets/RoundedButton";
 
 const NavUser = () => {
   return (
@@ -17,7 +15,7 @@ const NavUser = () => {
           <div className="nav-user-infor-id">{UserInfor[1]}</div>
         </div>
       </div>
-      <SettingsIcon w={10} h={10} />
+      {/*<SettingsIcon w={10} h={10} />*/}
     </>
   );
 };
