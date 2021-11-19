@@ -1,4 +1,6 @@
 import React from "react";
+import { formatDistanceToNow, parseISO } from "date-fns";
+
 import IQuestion from "../../../types/question.interface";
 
 interface Props {
@@ -10,7 +12,10 @@ const Question: React.FC<Props> = ({ question }) => {
     <>
       <div className="question">
         <div className="question-text">
-          <p className="posted-by-status">Posted by Leo Tang | 10s ago</p>
+          <p className="posted-by-status">
+            Posted by {question.user.name} |{" "}
+            {formatDistanceToNow(parseISO(question.createdAt))} ago
+          </p>
           <h1 className="question-title">{question.title}</h1>
           <p className="question-content">{question.body}</p>
         </div>
