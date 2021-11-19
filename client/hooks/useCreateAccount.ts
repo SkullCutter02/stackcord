@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import CreateAccountFormInput from "../types/formInputs/createAccountFormInput.interface";
 import { axios } from "../lib/axios";
@@ -6,6 +7,8 @@ import { axios } from "../lib/axios";
 export default function useCreateAccount() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const router = useRouter();
 
   const createAccount = async ({
     name,
@@ -22,7 +25,7 @@ export default function useCreateAccount() {
         password: password,
       });
 
-      setIsLoading(false);
+      await router.push("/dashboard");
     } catch (err) {
       setIsLoading(false);
       setError(err.response.data.message);
