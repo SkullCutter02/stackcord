@@ -1,16 +1,31 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 
-const User: React.FC = () => {
+import IUser from "../../../types/user.interface";
+
+interface Props {
+  isLoading: boolean;
+  user: IUser;
+}
+
+const User: React.FC<Props> = ({ isLoading, user }) => {
+  console.log(isLoading);
   return (
     <>
       <div className="user">
-        <div className="avatar" />
-        <p className="user-name">Colin Chau</p>
-        <img
-          className="settings-icon"
-          src={"/svg/settings.svg"}
-          alt="settings icon"
-        />
+        {isLoading ? (
+          <Skeleton width={100} height={40} />
+        ) : (
+          <>
+            <div className="avatar" />
+            <p className="user-name">{user.name}</p>
+            <img
+              className="settings-icon"
+              src={"/svg/settings.svg"}
+              alt="settings icon"
+            />
+          </>
+        )}
       </div>
 
       <style jsx>{`

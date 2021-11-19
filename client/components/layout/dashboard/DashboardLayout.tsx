@@ -1,13 +1,18 @@
 import React from "react";
+import { useQuery } from "react-query";
 
 import User from "./User";
+import IUser from "../../../types/user.interface";
+import getMe from "../../../queries/getMe";
 
-const DashboardLayout: React.FC = ({ children }) => {
+const DashboardLayout: React.FC = () => {
+  const { isLoading, data } = useQuery<IUser>("user", () => getMe());
+
   return (
     <>
       <main>
         <nav>
-          <User />
+          <User user={data} isLoading={isLoading} />
           <div className="divider" />
           <img src={"/svg/addIcon.svg"} alt="add icon" className="add-icon" />
 

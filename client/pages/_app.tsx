@@ -4,11 +4,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 import DashboardLayout from "../components/layout/dashboard/DashboardLayout";
 
 import "../styles/global.css";
 import "../styles/variables.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -23,13 +25,15 @@ function App({ Component, pageProps }: AppProps) {
           <title>StackCord</title>
         </Head>
 
-        {path[1] !== "" ? (
-          <DashboardLayout>
+        <SkeletonTheme baseColor={"#393939"} highlightColor={"#636363"}>
+          {path[1] !== "" ? (
+            <DashboardLayout>
+              <Component {...pageProps} />
+            </DashboardLayout>
+          ) : (
             <Component {...pageProps} />
-          </DashboardLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </SkeletonTheme>
       </Hydrate>
       <ReactQueryDevtools />
     </QueryClientProvider>
