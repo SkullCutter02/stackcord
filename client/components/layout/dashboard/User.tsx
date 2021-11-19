@@ -24,7 +24,7 @@ const User: React.FC = () => {
         .avatar {
           width: 50px;
           border-radius: 12px;
-          height: 100%;
+          height: 50px;
           background: #2777ba;
         }
 
