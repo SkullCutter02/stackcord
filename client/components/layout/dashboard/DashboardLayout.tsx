@@ -22,7 +22,7 @@ const DashboardLayout: React.FC = ({ children }) => {
 
   return (
     <>
-      <main>
+      <div className="container">
         <nav>
           <User />
           <div className="divider" />
@@ -30,11 +30,11 @@ const DashboardLayout: React.FC = ({ children }) => {
           <Halls />
         </nav>
         <Aside />
-        <div className="content">{children}</div>
-      </main>
+        <main className="content">{children}</main>
+      </div>
 
       <style jsx>{`
-        main {
+        .container {
           max-height: 100vh;
           max-width: 100vw;
         }
