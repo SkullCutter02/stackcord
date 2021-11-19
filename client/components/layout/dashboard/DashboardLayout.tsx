@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import User from "./User";
 import Halls from "./Halls";
+import Aside from "./Aside";
 import { axios } from "../../../lib/axios";
 
 const DashboardLayout: React.FC = ({ children }) => {
@@ -28,6 +29,7 @@ const DashboardLayout: React.FC = ({ children }) => {
           <img src={"/svg/addIcon.svg"} alt="add icon" className="add-icon" />
           <Halls />
         </nav>
+        <Aside />
         <div className="content">{children}</div>
       </main>
 
@@ -41,6 +43,7 @@ const DashboardLayout: React.FC = ({ children }) => {
           position: relative;
           height: calc(100vh - 100px);
           overflow-y: scroll;
+          padding: 40px;
         }
 
         nav {
