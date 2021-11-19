@@ -9,7 +9,7 @@ const HomePageContainer: React.FC = () => {
       <main>
         <CreateAccountForm />
         <div className="divider" />
-        {/*<LoginForm />*/}
+        <LoginForm />
       </main>
 
       <style jsx>{`
