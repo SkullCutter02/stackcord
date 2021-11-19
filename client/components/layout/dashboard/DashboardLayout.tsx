@@ -3,7 +3,7 @@ import React from "react";
 import User from "./User";
 import Halls from "./Halls";
 
-const DashboardLayout: React.FC = () => {
+const DashboardLayout: React.FC = ({ children }) => {
   return (
     <>
       <main>
@@ -13,13 +13,19 @@ const DashboardLayout: React.FC = () => {
           <img src={"/svg/addIcon.svg"} alt="add icon" className="add-icon" />
           <Halls />
         </nav>
+        <div className="content">{children}</div>
       </main>
 
       <style jsx>{`
         main {
-          overflow: scroll;
           max-height: 100vh;
           max-width: 100vw;
+        }
+
+        .content {
+          position: relative;
+          height: calc(100vh - 100px);
+          overflow-y: scroll;
         }
 
         nav {
