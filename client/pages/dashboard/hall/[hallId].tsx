@@ -8,6 +8,7 @@ import IHall from "../../../types/hall.interface";
 import PrimaryTextInput from "../../../components/widgets/PrimaryTextInput";
 import Question from "../../../components/ui/hall/Question";
 import { HallContext } from "../../../context/HallContext";
+import ServerInterfaceButtons from "../../../components/ui/hall/ServerInterfaceButtons";
 
 const HallPage: React.FC = () => {
   const router = useRouter();
@@ -31,41 +32,12 @@ const HallPage: React.FC = () => {
         placeholder={"Search for a question here..."}
         name={"search"}
       />
-      <div className="server-interface-buttons">
-        <button className="unanswered-button">Unanswered</button>
-        <button className="answered-button">Answered</button>
-        <button className="new-thread-button">+ NEW THREAD</button>
-      </div>
+      <ServerInterfaceButtons />
       <div className="questions">
         {hall.questions.map((question) => (
           <Question question={question} key={question.id} />
         ))}
       </div>
-
-      <style jsx>{`
-        .server-interface-buttons {
-          display: flex;
-          width: 100%;
-          margin: 40px 0;
-        }
-
-        .new-thread-button {
-          margin-left: auto;
-          background: var(--secondaryColor);
-        }
-
-        button {
-          background: var(--primaryColor);
-          padding: 12px 40px;
-          border: none;
-          border-radius: 200px;
-          text-transform: uppercase;
-        }
-
-        .answered-button {
-          background: none;
-        }
-      `}</style>
     </>
   );
 };
