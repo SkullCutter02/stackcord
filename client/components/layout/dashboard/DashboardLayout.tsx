@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 
 import User from "./User";
 import Halls from "./Halls";
+import { axios } from "../../../lib/axios";
 
 const DashboardLayout: React.FC = ({ children }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get("auth/me")
+      .then((data) => {
+        if (!data) router.push("/").then();
+      })
+      .catch((_) => {
+        router.push("/").then();
+      });
+  }, []);
+
   return (
     <>
       <main>
