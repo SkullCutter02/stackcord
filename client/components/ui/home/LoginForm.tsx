@@ -6,35 +6,25 @@ import * as yup from "yup";
 import FormContainer from "./FormContainer";
 import PrimaryTextInput from "../../widgets/PrimaryTextInput";
 import RoundedButton from "../../widgets/RoundedButton";
-
-interface FormInput {
-  email: string;
-  password: string;
-}
+import LogInFormInput from "../../../types/formInputs/logInFormInput.interface";
+import useLogin from "../../../hooks/useLogin";
 
 const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInput>({
+  } = useForm<LogInFormInput>({
     mode: "onChange",
     resolver: yupResolver(
       yup.object().shape({
-        email: yup.string().email().max(50).required(),
-        password: yup
-          .string()
-          .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-            "password needs to have a minimum of 8 characters, one letter and one number"
-          )
-          .max(100)
-          .required(),
+        email: yup.string().email().required(),
+        password: yup.string().required(),
       })
     ),
   });
 
-  const login = (input: FormInput) => {};
+  const { login } = useLogin();
 
   return (
     <>

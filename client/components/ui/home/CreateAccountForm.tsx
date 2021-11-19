@@ -6,19 +6,14 @@ import * as yup from "yup";
 import FormContainer from "./FormContainer";
 import PrimaryTextInput from "../../widgets/PrimaryTextInput";
 import RoundedButton from "../../widgets/RoundedButton";
-
-interface FormInput {
-  name: string;
-  email: string;
-  password: string;
-}
+import CreateAccountFormInput from "../../../types/formInputs/createAccountFormInput.interface";
 
 const CreateAccountForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInput>({
+  } = useForm<CreateAccountFormInput>({
     mode: "onChange",
     resolver: yupResolver(
       yup.object().shape({
@@ -36,7 +31,7 @@ const CreateAccountForm: React.FC = () => {
     ),
   });
 
-  const createAccount = (input: FormInput) => {
+  const createAccount = (input: CreateAccountFormInput) => {
     console.log(input);
   };
 
