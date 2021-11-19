@@ -20,7 +20,7 @@ export class HallService {
       .query()
       .findById(hallId)
       .withGraphFetched("[users]")
-      .withGraphJoined("[questions, questions.answers]");
+      .withGraphJoined("[questions.[user, answers]]");
   }
 
   public async getUserHalls(userId: string) {
