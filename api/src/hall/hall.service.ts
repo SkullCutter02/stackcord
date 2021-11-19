@@ -24,11 +24,7 @@ export class HallService {
   }
 
   public async getUserHalls(userId: string) {
-    return this.hallUserModel
-      .query()
-      .where({ userId })
-      .innerJoin("halls", "halls.id", "=", "halls_users.hall_id")
-      .select("*");
+    return this.hallModel.query().withGraphJoined("users").where("users.id", userId);
   }
 
   public async createHall({ name, anonymous }: CreateHallDto, user: User) {
