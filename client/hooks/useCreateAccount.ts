@@ -1,18 +1,23 @@
 import { useState } from "react";
 
-import LogInFormInput from "../types/formInputs/logInFormInput.interface";
+import CreateAccountFormInput from "../types/formInputs/createAccountFormInput.interface";
 import { axios } from "../lib/axios";
 
-export default function useLogin() {
+export default function useCreateAccount() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const login = async ({ email, password }: LogInFormInput) => {
+  const createAccount = async ({
+    name,
+    email,
+    password,
+  }: CreateAccountFormInput) => {
     setIsLoading(true);
     setError("");
 
     try {
-      await axios.post("auth/login", {
+      await axios.post("auth/signup", {
+        name: name.trim(),
         email: email.toLowerCase().trim(),
         password: password,
       });
@@ -24,5 +29,5 @@ export default function useLogin() {
     }
   };
 
-  return { login, isLoading, error };
+  return { createAccount, isLoading, error };
 }

@@ -7,6 +7,7 @@ import FormContainer from "./FormContainer";
 import PrimaryTextInput from "../../widgets/PrimaryTextInput";
 import RoundedButton from "../../widgets/RoundedButton";
 import CreateAccountFormInput from "../../../types/formInputs/createAccountFormInput.interface";
+import useCreateAccount from "../../../hooks/useCreateAccount";
 
 const CreateAccountForm: React.FC = () => {
   const {
@@ -23,7 +24,7 @@ const CreateAccountForm: React.FC = () => {
           .string()
           .matches(
             /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-            "password needs to have a minimum of 8 characters, one letter and one number"
+            "password needs to have a minimum of 8 characters, and only contains letters and numbers"
           )
           .max(100)
           .required(),
@@ -31,9 +32,7 @@ const CreateAccountForm: React.FC = () => {
     ),
   });
 
-  const createAccount = (input: CreateAccountFormInput) => {
-    console.log(input);
-  };
+  const { createAccount, isLoading, error } = useCreateAccount();
 
   return (
     <>
@@ -41,6 +40,7 @@ const CreateAccountForm: React.FC = () => {
         header={"Create Account"}
         handleSubmit={handleSubmit}
         submitFn={createAccount}
+        error={error}
       >
         <PrimaryTextInput
           placeholder={"What's your name?"}
@@ -74,19 +74,9 @@ const CreateAccountForm: React.FC = () => {
           width={"30%"}
           minWidth={"100px"}
           buttonType={"submit"}
+          disabled={isLoading}
         />
       </FormContainer>
-
-      <style jsx>{`
-        button {
-          background: var(--secondaryColor);
-          padding: 17px 25px;
-          border: none;
-          border-radius: 200px;
-          text-transform: uppercase;
-          width: 40%;
-        }
-      `}</style>
     </>
   );
 };
