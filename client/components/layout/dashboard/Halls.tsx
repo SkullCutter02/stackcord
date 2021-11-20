@@ -24,7 +24,8 @@ const Halls: React.FC = () => {
                     <p className="student-count">
                       {hall.users.length} student
                       {hall.users.length !== 1 && "s"}
-                      {/*TODO: DON'T COUNT TEACHERS AS STUDENTS*/}
+                      {/* TODO: DON'T COUNT TEACHERS AS STUDENTS*/}
+                      {/* TODO: FIXED STUDENT NOT RIGHT ISSUE */}
                     </p>
                   </div>
                 </div>
@@ -35,6 +36,10 @@ const Halls: React.FC = () => {
       </div>
 
       <style jsx>{`
+        .halls {
+          display: flex;
+        }
+
         .hall {
           height: 100%;
           background: var(--tertiaryBackgroundColor);
