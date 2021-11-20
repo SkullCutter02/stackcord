@@ -22,7 +22,6 @@ export default function useCreateHall() {
         name: name.trim(),
         anonymous: false,
       });
-      console.log(data);
 
       const qData: IHall[] = queryClient.getQueryData("halls");
       queryClient.setQueryData("halls", [...qData, data]);

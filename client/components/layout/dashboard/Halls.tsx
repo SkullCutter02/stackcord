@@ -38,6 +38,8 @@ const Halls: React.FC = () => {
       <style jsx>{`
         .halls {
           display: flex;
+          flex-wrap: nowrap;
+          overflow-x: scroll;
         }
 
         .hall {
@@ -47,6 +49,7 @@ const Halls: React.FC = () => {
           padding: 12px;
           margin-right: 30px;
           cursor: pointer;
+          min-width: fit-content;
         }
 
         .hall-info {

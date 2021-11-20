@@ -55,7 +55,6 @@ const DashboardLayout: React.FC = ({ children }) => {
           border-bottom: 1px solid #383838;
           padding: 15px 20px;
           display: flex;
-          overflow-y: scroll;
         }
 
         .divider {
