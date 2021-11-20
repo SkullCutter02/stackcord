@@ -2,18 +2,25 @@ import React from "react";
 
 interface Props {
   type: "join" | "create";
+  handleSubmit: any;
+  submitFn: (...any) => any;
 }
 
-const JoinOrCreateHallContainer: React.FC<Props> = ({ children, type }) => {
+const JoinOrCreateHallContainer: React.FC<Props> = ({
+  children,
+  type,
+  handleSubmit,
+  submitFn,
+}) => {
   return (
     <>
-      <div className="container">
+      <form className="container" onSubmit={handleSubmit(submitFn)}>
         <div>
           <img className="hall-icon" src={"/svg/hall.svg"} alt="hall icon" />
           <h1>{type} a hall</h1>
           {children}
         </div>
-      </div>
+      </form>
 
       <style jsx>{`
         .container {
