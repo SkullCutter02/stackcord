@@ -8,6 +8,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 
 import DashboardLayout from "../components/layout/dashboard/DashboardLayout";
 import { HallProvider } from "../context/HallContext";
+import { SocketProvider } from "../context/SocketContext";
 
 import "../styles/global.css";
 import "../styles/variables.css";
@@ -31,11 +32,13 @@ function App({ Component, pageProps }: AppProps) {
 
         <SkeletonTheme baseColor={"#393939"} highlightColor={"#636363"}>
           {path[1] !== "" ? (
-            <HallProvider>
-              <DashboardLayout>
-                <Component {...pageProps} />
-              </DashboardLayout>
-            </HallProvider>
+            <SocketProvider>
+              <HallProvider>
+                <DashboardLayout>
+                  <Component {...pageProps} />
+                </DashboardLayout>
+              </HallProvider>
+            </SocketProvider>
           ) : (
             <Component {...pageProps} />
           )}

@@ -10,7 +10,7 @@ export class QuestionService {
   constructor(@Inject(Question) private readonly questionModel: typeof Question) {}
 
   public async getQuestion(questionId: string) {
-    return this.questionModel.query().findById(questionId).withGraphJoined("[hall, user, answers]");
+    return this.questionModel.query().findById(questionId).withGraphJoined("[hall, user, answers.user]");
   }
 
   public async getUserQuestions(user: User) {
