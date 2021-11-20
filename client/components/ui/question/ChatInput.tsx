@@ -1,11 +1,47 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
+import { useRouter } from "next/router";
+
+import { axios } from "../../../lib/axios";
 
 const ChatInput: React.FC = () => {
+  const [isPosting, setIsPosting] = useState<boolean>(false);
+
+  const router = useRouter();
+  const questionId = router.query.questionId;
+
+  const postAnswer = async (e) => {
+    e.preventDefault();
+
+    const body: string = e.target.body.value;
+
+    if (body.length === 0) return;
+
+    setIsPosting(true);
+
+    try {
+      const { data } = await axios.post("answer", { body: body, questionId: questionId });
+      console.log(data);
+
+      e.target.body.value = "";
+      setIsPosting(false);
+    } catch (err) {
+      setIsPosting(false);
+      console.log(err);
+    }
+  };
+
   return (
     <>
-      <div className="message-input-bar-background">
-        <input type="text" className="message-input-bar" placeholder="Type your message here..." />
-      </div>
+      <form onSubmit={postAnswer} className="message-input-bar-background">
+        <input
+          type="text"
+          name="body"
+          className="message-input-bar"
+          placeholder="Type your message here..."
+          disabled={isPosting}
+        />
+        <button type={"submit"} style={{ display: "none" }} />
+      </form>
 
       <style jsx>{`
         .message-input-bar-background {
