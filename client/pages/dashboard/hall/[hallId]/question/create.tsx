@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import MarkdownEditor from "../../../../../components/ui/hall/MarkdownEditor";
 import PrimaryTextInput from "../../../../../components/widgets/PrimaryTextInput";
+import Whiteboard from "../../../../../components/ui/hall/Whiteboard";
 
 const CreateQuestionPage: React.FC = () => {
   const [body, setBody] = useState<string>("**Hello World!**");
@@ -15,6 +16,7 @@ const CreateQuestionPage: React.FC = () => {
           name={"title"}
           margin={"0 0 25px 0"}
         />
+        <Whiteboard />
         <MarkdownEditor body={body} setBody={setBody} />
       </form>
 
