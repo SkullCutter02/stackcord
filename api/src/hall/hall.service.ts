@@ -32,10 +32,7 @@ export class HallService {
 
     const hall = await this.hallModel.query().insert({ name, code, anonymous });
     await this.hallUserModel.query().insert({ role: "teacher", hallId: hall.id, userId: user.id });
-    return this.hallUserModel
-      .query()
-      .findOne({ hallId: hall.id, userId: user.id })
-      .withGraphJoined("[hall, user]");
+    return this.getHall(hall.id);
   }
 
   public async joinHall(code: string, user: User) {
