@@ -6,7 +6,7 @@ const ServerInterfaceButtons: React.FC = () => {
       <div className="server-interface-buttons">
         <button className="unanswered-button">Unanswered</button>
         <button className="answered-button">Answered</button>
-        <button className="new-thread-button">+ NEW THREAD</button>
+        <button className="new-question-button">+ NEW QUESTION</button>
       </div>
 
       <style jsx>{`
@@ -16,7 +16,7 @@ const ServerInterfaceButtons: React.FC = () => {
           margin: 40px 0;
         }
 
-        .new-thread-button {
+        .new-question-button {
           margin-left: auto;
           background: var(--secondaryColor);
         }
