@@ -12,6 +12,7 @@ interface Props {
   hasBorder?: boolean;
   fontWeight?: number;
   minWidth?: string;
+  fontSize?: number;
 }
 
 const RoundedButton: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const RoundedButton: React.FC<Props> = ({
   hasBorder = false,
   fontWeight = 400,
   minWidth = "0",
+  fontSize = 1,
 }) => {
   const color =
     buttonColor === "primary"
@@ -51,6 +53,7 @@ const RoundedButton: React.FC<Props> = ({
           font-family: var(--secondaryFont);
           font-weight: ${fontWeight};
           min-width: ${minWidth};
+          font-size: ${fontSize}rem;
         }
       `}</style>
     </>

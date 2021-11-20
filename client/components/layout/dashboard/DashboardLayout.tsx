@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import User from "./User";
 import Halls from "./Halls";
@@ -26,7 +27,9 @@ const DashboardLayout: React.FC = ({ children }) => {
         <nav>
           <User />
           <div className="divider" />
-          <img src={"/svg/addIcon.svg"} alt="add icon" className="add-icon" />
+          <Link href={"/dashboard/hall/join"}>
+            <img src={"/svg/addIcon.svg"} alt="add icon" className="add-icon" />
+          </Link>
           <Halls />
         </nav>
         <Aside />
