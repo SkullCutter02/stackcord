@@ -48,7 +48,7 @@ const Aside: React.FC = () => {
         aside {
           float: right;
           height: calc(100vh - 100px);
-          width: 25vw;
+          width: 20vw;
           background: var(--secondaryBackgroundColor);
           border-left: 2px solid #383838;
           padding: 40px;
