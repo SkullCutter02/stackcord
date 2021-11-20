@@ -1,5 +1,6 @@
 import Base from "./base.interface";
 import IUser from "./user.interface";
+import IAnswer from "./answer.interface";
 
 export default interface IQuestion extends Base {
   title: string;
@@ -7,4 +8,5 @@ export default interface IQuestion extends Base {
   whiteboard?: string;
   answered: boolean;
   user: IUser;
+  answers: IAnswer[];
 }
