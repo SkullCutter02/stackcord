@@ -30,10 +30,10 @@ export class HallController {
     return this.hallService.createHall(createHallDto, req.user);
   }
 
-  @Post("/:id/join")
-  @UseGuards(JwtAuthGuard, IsUserInHallGuard)
-  joinHall(@Param("id", ParseUUIDPipe) hallId: string, @Req() req: ReqWithUser) {
-    return this.hallService.joinHall(hallId, req.user);
+  @Post("/:code/join")
+  @UseGuards(JwtAuthGuard)
+  joinHall(@Param("code") code: string, @Req() req: ReqWithUser) {
+    return this.hallService.joinHall(code, req.user);
   }
 
   @Patch("/:id")
