@@ -20,12 +20,14 @@ export default function useCreateQuestion(
     setError("");
 
     try {
-      await axios.post("question", {
+      const { data } = await axios.post("question", {
         title: title.trim(),
         body: body,
         whiteboard: saveableCanvas.getSaveData(),
         hallId: hallId,
       });
+
+      await router.push(`/dashboard/hall/${hallId}/question/${data.id}`);
     } catch (err) {
       setIsLoading(false);
       setError(err.response.data.message);

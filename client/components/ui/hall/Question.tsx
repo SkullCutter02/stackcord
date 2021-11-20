@@ -1,5 +1,7 @@
 import React from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import IQuestion from "../../../types/question.interface";
 
@@ -8,6 +10,9 @@ interface Props {
 }
 
 const Question: React.FC<Props> = ({ question }) => {
+  const router = useRouter();
+  const hallId = router.query.hallId;
+
   return (
     <>
       <div className="question">
@@ -16,7 +21,9 @@ const Question: React.FC<Props> = ({ question }) => {
             Posted by {question.user.name} |{" "}
             {formatDistanceToNow(parseISO(question.createdAt))} ago
           </p>
-          <h1 className="question-title">{question.title}</h1>
+          <Link href={`/dashboard/hall/${hallId}/question/${question.id}`}>
+            <h1 className="question-title">{question.title}</h1>
+          </Link>
           <p className="question-content">{question.body}</p>
         </div>
         {/*<div className="question-image"></div>*/}
@@ -47,6 +54,8 @@ const Question: React.FC<Props> = ({ question }) => {
         .question-title {
           font-size: calc(1em + 0.3vw);
           margin-bottom: 10px;
+          cursor: pointer;
+          display: inline-block;
         }
 
         .posted-by-status {
