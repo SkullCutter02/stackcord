@@ -44,7 +44,7 @@ const QuestionPage: React.FC = () => {
         </div>
 
         {question.answers
-          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
           .map((answer) => (
             <div className="message" key={answer.id}>
               <div className="message">

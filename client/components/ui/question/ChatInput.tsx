@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useQueryClient } from "react-query";
 
 import { axios } from "../../../lib/axios";
+import IQuestion from "../../../types/question.interface";
 
 const ChatInput: React.FC = () => {
   const [isPosting, setIsPosting] = useState<boolean>(false);
 
   const router = useRouter();
   const questionId = router.query.questionId;
+
+  const queryClient = useQueryClient();
 
   const postAnswer = async (e) => {
     e.preventDefault();
@@ -20,10 +24,12 @@ const ChatInput: React.FC = () => {
 
     try {
       const { data } = await axios.post("answer", { body: body, questionId: questionId });
-      console.log(data);
 
       e.target.body.value = "";
       setIsPosting(false);
+
+      const qData = queryClient.getQueryData<IQuestion>(["question", questionId]);
+      queryClient.setQueryData(["question", questionId], { ...qData, answers: [...qData.answers, data] });
     } catch (err) {
       setIsPosting(false);
       console.log(err);
