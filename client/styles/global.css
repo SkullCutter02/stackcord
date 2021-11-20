@@ -39,3 +39,24 @@ input:focus::placeholder {
   color: var(--errorColor);
   font-size: 0.7rem;
 }
+
+.wmde-markdown pre code {
+  background: var(--secondaryBackgroundColor) !important;
+  text-shadow: initial !important;
+}
+
+.wmde-markdown code {
+  background-color: #000;
+}
+
+.wmde-markdown pre code * {
+  background: var(--secondaryBackgroundColor) !important;
+}
+
+.w-md-editor * {
+  background: var(--tertiaryBackgroundColor) !important;
+}
+
+.w-md-editor-text-input {
+  -webkit-text-fill-color: initial !important;
+}

@@ -1,12 +1,19 @@
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const ServerInterfaceButtons: React.FC = () => {
+  const router = useRouter();
+  const hallId = router.query.hallId;
+
   return (
     <>
       <div className="server-interface-buttons">
         <button className="unanswered-button">Unanswered</button>
         <button className="answered-button">Answered</button>
-        <button className="new-question-button">+ NEW QUESTION</button>
+        <Link href={`/dashboard/hall/${hallId}/question/create`}>
+          <button className="new-question-button">+ NEW QUESTION</button>
+        </Link>
       </div>
 
       <style jsx>{`

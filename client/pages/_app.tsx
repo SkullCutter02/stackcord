@@ -11,7 +11,11 @@ import { HallProvider } from "../context/HallContext";
 
 import "../styles/global.css";
 import "../styles/variables.css";
+
 import "react-loading-skeleton/dist/skeleton.css";
+import "katex/dist/katex.css";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());

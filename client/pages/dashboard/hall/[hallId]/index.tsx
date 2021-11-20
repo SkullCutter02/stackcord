@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 
-import getHall from "../../../queries/getHall";
-import IHall from "../../../types/hall.interface";
-import PrimaryTextInput from "../../../components/widgets/PrimaryTextInput";
-import Question from "../../../components/ui/hall/Question";
-import { HallContext } from "../../../context/HallContext";
-import ServerInterfaceButtons from "../../../components/ui/hall/ServerInterfaceButtons";
+import getHall from "../../../../queries/getHall";
+import IHall from "../../../../types/hall.interface";
+import PrimaryTextInput from "../../../../components/widgets/PrimaryTextInput";
+import Question from "../../../../components/ui/hall/Question";
+import { HallContext } from "../../../../context/HallContext";
+import ServerInterfaceButtons from "../../../../components/ui/hall/ServerInterfaceButtons";
 
 const HallPage: React.FC = () => {
   const router = useRouter();
