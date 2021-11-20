@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import CanvasDraw from "react-canvas-draw";
 
-const Whiteboard: React.FC = () => {
-  const [saveableCanvas, setSaveableCanvas] = useState<CanvasDraw>(null);
+interface Props {
+  saveableCanvas: CanvasDraw;
+  setSaveableCanvas: Dispatch<SetStateAction<CanvasDraw>>;
+}
 
+const Whiteboard: React.FC<Props> = ({ saveableCanvas, setSaveableCanvas }) => {
   return (
     <>
       <div style={{ margin: "40px 0" }}>

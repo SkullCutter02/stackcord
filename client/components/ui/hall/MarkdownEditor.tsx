@@ -11,7 +11,12 @@ interface Props {
 const MarkdownEditor: React.FC<Props> = ({ body, setBody }) => {
   return (
     <>
-      <MDEditor value={body} onChange={setBody} height={350} />
+      <MDEditor
+        value={body}
+        onChange={setBody}
+        height={350}
+        style={{ marginBottom: "20px" }}
+      />
     </>
   );
 };
