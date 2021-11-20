@@ -1,43 +1,30 @@
 import React from "react";
-import Link from "next/link";
 
 import JoinOrCreateHallContainer from "../../../components/ui/hall/JoinOrCreateHallContainer";
 import PrimaryTextInput from "../../../components/widgets/PrimaryTextInput";
 import RoundedButton from "../../../components/widgets/RoundedButton";
 
-const JoinHallPage: React.FC = () => {
+const CreateHallPage: React.FC = () => {
   return (
     <>
-      <JoinOrCreateHallContainer type={"join"}>
+      <JoinOrCreateHallContainer type={"create"}>
         <PrimaryTextInput
-          placeholder={"Enter hall code here..."}
-          name={"code"}
+          placeholder={"Enter hall name here..."}
+          name={"name"}
           margin={"20px 0 20px 0"}
           width={"40%"}
           backgroundColor={"var(--primaryBackgroundColor)"}
         />
         <RoundedButton
-          buttonText={"Join"}
+          buttonText={"Create"}
           width={"initial"}
           padding={"12px 30px"}
-          buttonColor={"primary"}
+          buttonColor={"secondary"}
           fontSize={0.9}
         />
-        <Link href={"/dashboard/hall/create"}>
-          <p>Want to create one instead?</p>
-        </Link>
       </JoinOrCreateHallContainer>
-
-      <style jsx>{`
-        p {
-          font-size: 0.8rem;
-          color: var(--secondaryTextColor);
-          margin-top: 20px;
-          cursor: pointer;
-        }
-      `}</style>
     </>
   );
 };
 
-export default JoinHallPage;
+export default CreateHallPage;
