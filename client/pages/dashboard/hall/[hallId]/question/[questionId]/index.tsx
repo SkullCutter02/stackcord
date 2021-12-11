@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { GetServerSideProps } from "next";
-import { dehydrate, QueryClient, useQuery, useQueryClient } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import CanvasDraw from "react-canvas-draw";
@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import getQuestion from "../../../../../../queries/getQuestion";
 import IQuestion from "../../../../../../types/question.interface";
 import ChatInput from "../../../../../../components/ui/question/ChatInput";
-import { SocketContext } from "../../../../../../context/SocketContext";
+import useJoinQuestionRoom from "../../../../../../hooks/useJoinQuestionRoom";
 
 // @ts-ignore
 const MD: any = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default.Markdown), {
@@ -17,28 +17,12 @@ const MD: any = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.d
 });
 
 const QuestionPage: React.FC = () => {
-  const socket = useContext(SocketContext);
-  const queryClient = useQueryClient();
-
   const router = useRouter();
   const questionId = router.query.questionId;
 
   const { data: question } = useQuery<IQuestion>(["question", questionId], () => getQuestion(questionId));
 
-  useEffect(() => {
-    if (questionId) {
-      socket.emit("join_question_room", questionId);
-
-      socket.on("receive_answer", (data) => {
-        const qData = queryClient.getQueryData<IQuestion>(["question", questionId]);
-        queryClient.setQueryData(["question", questionId], { ...qData, answers: [...qData.answers, data] });
-      });
-
-      return () => {
-        socket.emit("leave_question_room", questionId);
-      };
-    }
-  }, [socket, questionId]);
+  useJoinQuestionRoom();
 
   return (
     <>
