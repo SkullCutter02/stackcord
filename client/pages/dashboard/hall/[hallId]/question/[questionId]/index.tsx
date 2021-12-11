@@ -46,24 +46,22 @@ const QuestionPage: React.FC = () => {
           <MD source={question.body} />
         </div>
 
-        {question.answers
-          .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
-          .map((answer) => (
-            <div className="message" key={answer.id}>
-              <div className="message">
-                <div className="message-user-info">
-                  <div className="member-avatar" />
-                  <p>
-                    {answer.user.name}{" "}
-                    <span className="message-timestamp">
-                      | {formatDistanceToNow(parseISO(answer.createdAt))}
-                    </span>
-                  </p>
-                </div>
-                <p className="message-text">{answer.body}</p>
+        {question.answers.map((answer) => (
+          <div className="message" key={answer.id}>
+            <div className="message">
+              <div className="message-user-info">
+                <div className="member-avatar" />
+                <p>
+                  {answer.user.name}{" "}
+                  <span className="message-timestamp">
+                    | {formatDistanceToNow(parseISO(answer.createdAt))}
+                  </span>
+                </p>
               </div>
+              <p className="message-text">{answer.body}</p>
             </div>
-          ))}
+          </div>
+        ))}
 
         <ChatInput />
 
