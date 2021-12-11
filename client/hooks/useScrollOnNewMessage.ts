@@ -9,7 +9,7 @@ export default function useScrollOnNewMessage() {
     const lastMessage = container.querySelector(".messages").lastElementChild as HTMLElement;
 
     if (lastMessage) {
-      const newMessageHeight = lastMessage.offsetHeight + 60;
+      const newMessageHeight = lastMessage.offsetHeight + 60; // as .chat has a padding-bottom of 60px
       const visibleHeight = container.offsetHeight;
       const containerHeight = container.scrollHeight;
       const scrollOffset = container.scrollTop + visibleHeight;
