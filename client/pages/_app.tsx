@@ -13,6 +13,7 @@ import { ContentRefProvider } from "../context/ContentRefContext";
 
 import "../styles/global.css";
 import "../styles/variables.css";
+import "../styles/answers.css";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import "@uiw/react-md-editor/markdown-editor.css";

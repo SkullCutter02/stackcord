@@ -1,0 +1,37 @@
+.message {
+  margin-right: auto;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.message-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.message-timestamp {
+  color: var(--secondaryTextColor);
+}
+
+.message-question-title {
+  margin-top: 20px;
+}
+
+.message-question-image {
+  max-width: 50%;
+  margin-top: 10px;
+}
+
+.member-avatar {
+  width: 38px;
+  border-radius: 12px;
+  height: 38px;
+  background: #2777ba;
+  margin-right: 15px;
+}
+
+.message-text {
+  margin-top: 10px;
+  font-size: calc(0.7em + 0.3vw);
+  line-height: 1.7em;
+}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useRouter } from "next/router";
-import { formatDistanceToNow, parseISO, intervalToDuration } from "date-fns";
+import { formatDistanceToNow, parseISO } from "date-fns";
 import CanvasDraw from "react-canvas-draw";
 import dynamic from "next/dynamic";
 
@@ -11,6 +11,7 @@ import IQuestion from "../../../../../../types/question.interface";
 import ChatInput from "../../../../../../components/ui/question/ChatInput";
 import useJoinQuestionRoom from "../../../../../../hooks/useJoinQuestionRoom";
 import useScrollOnNewMessage from "../../../../../../hooks/useScrollOnNewMessage";
+import Answers from "../../../../../../components/ui/hall/Answers";
 
 // @ts-ignore
 const MD: any = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default.Markdown), {
@@ -55,33 +56,7 @@ const QuestionPage: React.FC = () => {
           <MD source={question.body} />
         </div>
 
-        <div className="messages">
-          {question.answers.map((answer, index) => {
-            return question.answers[index - 1] &&
-              answer.user.id === question.answers[index - 1].user.id &&
-              intervalToDuration({
-                start: parseISO(question.answers[index - 1].createdAt),
-                end: parseISO(answer.createdAt),
-              }).minutes <= 3 ? (
-              <p className="message-text" key={answer.id}>
-                {answer.body}
-              </p>
-            ) : (
-              <div className="message" key={answer.id}>
-                <div className="message-user-info">
-                  <div className="member-avatar" />
-                  <p>
-                    {answer.user.name}{" "}
-                    <span className="message-timestamp">
-                      | {formatDistanceToNow(parseISO(answer.createdAt))}
-                    </span>
-                  </p>
-                </div>
-                <p className="message-text">{answer.body}</p>
-              </div>
-            );
-          })}
-        </div>
+        <Answers answers={question.answers} />
 
         <ChatInput />
 
@@ -89,43 +64,6 @@ const QuestionPage: React.FC = () => {
       </div>
 
       <style jsx>{`
-        .user-message {
-          width: 90%;
-        }
-
-        .message {
-          margin-right: auto;
-          width: 100%;
-        }
-
-        .message {
-          margin-top: 50px;
-        }
-
-        .message-user-info {
-          display: flex;
-          align-items: center;
-        }
-
-        .message-timestamp {
-          color: var(--secondaryTextColor);
-        }
-
-        .message-question-title {
-          margin-top: 20px;
-        }
-
-        .message-question-image {
-          max-width: 50%;
-          margin-top: 10px;
-        }
-
-        .message-text {
-          margin-top: 10px;
-          font-size: calc(0.7em + 0.3vw);
-          line-height: 1.7em;
-        }
-
         .chat {
           padding-bottom: 60px;
         }
@@ -144,14 +82,6 @@ const QuestionPage: React.FC = () => {
 
         .back-button:hover {
           border: 2px solid #4c4c4c;
-        }
-
-        .member-avatar {
-          width: 38px;
-          border-radius: 12px;
-          height: 38px;
-          background: #2777ba;
-          margin-right: 15px;
         }
       `}</style>
     </>
