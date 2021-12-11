@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import IHall from "../types/hall.interface";
+import { useQuery } from "react-query";
+import getHall from "../queries/getHall";
 
 interface IHallContext {
   hall: IHall;
@@ -11,22 +13,22 @@ interface IHallContext {
 export const HallContext = createContext<IHallContext>(null);
 
 export const HallProvider: React.FC = ({ children }) => {
-  const [hall, setHall] = useState<IHall | null>(null);
-
   const router = useRouter();
   const path = router.asPath.split("/");
 
+  const { data } = useQuery<IHall>(["hall", path[3]], () => getHall(path[3]), { enabled: !!path[3] });
+
+  const [hall, setHall] = useState<IHall | null>(data);
+
   useEffect(() => {
-    if (path.length === 2 && path[1] === "dashboard") {
-      setHall(null);
+    if (data) {
+      setHall(data);
     }
-  }, [path]);
+  }, [data]);
 
   return (
     <>
-      <HallContext.Provider value={{ hall, setHall }}>
-        {children}
-      </HallContext.Provider>
+      <HallContext.Provider value={{ hall, setHall }}>{children}</HallContext.Provider>
     </>
   );
 };
