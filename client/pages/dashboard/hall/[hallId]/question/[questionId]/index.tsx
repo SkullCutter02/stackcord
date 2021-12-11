@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import getQuestion from "../../../../../../queries/getQuestion";
 import IQuestion from "../../../../../../types/question.interface";
 import ChatInput from "../../../../../../components/ui/question/ChatInput";
 import useJoinQuestionRoom from "../../../../../../hooks/useJoinQuestionRoom";
+import useScrollOnNewMessage from "../../../../../../hooks/useScrollOnNewMessage";
 
 // @ts-ignore
 const MD: any = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default.Markdown), {
@@ -24,10 +25,18 @@ const QuestionPage: React.FC = () => {
 
   useJoinQuestionRoom();
 
+  const { scrollOnNewMessage } = useScrollOnNewMessage();
+
+  useEffect(() => {
+    if (question) {
+      scrollOnNewMessage();
+    }
+  }, [question]);
+
   return (
     <>
       <div className="chat">
-        <div className="message">
+        <div className="message-question">
           <div className="message-user-info">
             <div className="member-avatar" />
             <p>
@@ -46,9 +55,9 @@ const QuestionPage: React.FC = () => {
           <MD source={question.body} />
         </div>
 
-        {question.answers.map((answer) => (
-          <div className="message" key={answer.id}>
-            <div className="message">
+        <div className="messages">
+          {question.answers.map((answer) => (
+            <div className="message" key={answer.id}>
               <div className="message-user-info">
                 <div className="member-avatar" />
                 <p>
@@ -60,8 +69,8 @@ const QuestionPage: React.FC = () => {
               </div>
               <p className="message-text">{answer.body}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
 
         <ChatInput />
 
@@ -78,7 +87,7 @@ const QuestionPage: React.FC = () => {
           width: 100%;
         }
 
-        .message:not(:first-child) {
+        .message {
           margin-top: 50px;
         }
 

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { SocketContext } from "../context/SocketContext";
+import useScrollOnNewMessage from "./useScrollOnNewMessage";
 
 export default function usePostAnswer() {
   const [isPosting, setIsPosting] = useState<boolean>(false);

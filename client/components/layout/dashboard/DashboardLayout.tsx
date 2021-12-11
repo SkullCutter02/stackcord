@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -6,8 +6,11 @@ import User from "./User";
 import Halls from "./Halls";
 import Aside from "./Aside";
 import { axios } from "../../../lib/axios";
+import { ContentRefContext } from "../../../context/ContentRefContext";
 
 const DashboardLayout: React.FC = ({ children }) => {
+  const contentRef = useContext(ContentRefContext);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -33,7 +36,9 @@ const DashboardLayout: React.FC = ({ children }) => {
           <Halls />
         </nav>
         <Aside />
-        <main className="content">{children}</main>
+        <main className="content" id="content" ref={contentRef}>
+          {children}
+        </main>
       </div>
 
       <style jsx>{`
