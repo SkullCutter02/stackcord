@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useRouter } from "next/router";
-import { formatDistanceToNow, parseISO } from "date-fns";
+import { formatDistanceToNow, parseISO, intervalToDuration } from "date-fns";
 import CanvasDraw from "react-canvas-draw";
 import dynamic from "next/dynamic";
 
@@ -56,20 +56,31 @@ const QuestionPage: React.FC = () => {
         </div>
 
         <div className="messages">
-          {question.answers.map((answer) => (
-            <div className="message" key={answer.id}>
-              <div className="message-user-info">
-                <div className="member-avatar" />
-                <p>
-                  {answer.user.name}{" "}
-                  <span className="message-timestamp">
-                    | {formatDistanceToNow(parseISO(answer.createdAt))}
-                  </span>
-                </p>
+          {question.answers.map((answer, index) => {
+            return question.answers[index - 1] &&
+              answer.user.id === question.answers[index - 1].user.id &&
+              intervalToDuration({
+                start: parseISO(question.answers[index - 1].createdAt),
+                end: parseISO(answer.createdAt),
+              }).minutes <= 3 ? (
+              <p className="message-text" key={answer.id}>
+                {answer.body}
+              </p>
+            ) : (
+              <div className="message" key={answer.id}>
+                <div className="message-user-info">
+                  <div className="member-avatar" />
+                  <p>
+                    {answer.user.name}{" "}
+                    <span className="message-timestamp">
+                      | {formatDistanceToNow(parseISO(answer.createdAt))}
+                    </span>
+                  </p>
+                </div>
+                <p className="message-text">{answer.body}</p>
               </div>
-              <p className="message-text">{answer.body}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <ChatInput />
